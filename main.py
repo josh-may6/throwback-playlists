@@ -1,3 +1,5 @@
+import os
+
 from bs4 import BeautifulSoup
 import requests
 import spotipy
@@ -18,10 +20,10 @@ class MusicPlaylist:
         self.song_names = [song.get_text().strip() for song in song_name_spans]
 
     def create_spotify_playlist(self):
-        client_id = "4b8528b5b7f0432d9fcd5f507011d6b3"
-        client_secret = "4cc18076257c434388da1921924d0712"
+        client_id = os.environ["client_id"]
+        client_secret = os.environ["client_secret"]
         scope = "playlist-modify-public"
-        user_name = "1232727695"
+        user_name = os.environ["user_name"]
         redirect_uri = "http://example.com"
         token = SpotifyOAuth(scope=scope, username=user_name, client_id=client_id, client_secret=client_secret,
                              redirect_uri=redirect_uri)
